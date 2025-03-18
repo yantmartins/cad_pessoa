@@ -1,6 +1,6 @@
 <?php
 
-require "Usuario.php"; 
+require 'Usuario.php'; 
 
 if(isset($_POST['cadastrar'])){
     $nome = $_POST['nome'];
@@ -21,7 +21,7 @@ if(isset($_POST['cadastrar'])){
     }
 }
 
-$db = new Database("dados_pessoais");
+// $db = new Database("dados_pessoais");
 
 ?>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ $db = new Database("dados_pessoais");
             <br>
             <input type="email" id="email" name="email" placeholder="Digite seu email">
             <br>
-            <button type="submit" name="Cadastrar">Cadastrar</button>
+            <button type="submit" name="cadastrar">Cadastrar</button>
         </form>
     </div>   
 </body>
