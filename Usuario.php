@@ -23,4 +23,18 @@ Class Usuario{
         );
         return $res;
     }
+
+    public function buscar_todos(){
+        try {
+            $db = new Database('dados_pessoais');
+
+            $res = $db->select();
+
+            $res = $res->fetchAll(PDO::FETCH_ASSOC);
+
+            return $res;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

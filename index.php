@@ -2,12 +2,14 @@
 
 require 'Usuario.php'; 
 
+$objUser = new Usuario();
+
 if(isset($_POST['cadastrar'])){
     $nome = $_POST['nome'];
     $idade = $_POST['idade'];
     $email = $_POST['email'];
 
-    $objUser = new Usuario();
+    
     $objUser->nome = $nome;
     $objUser->idade = $idade;
     $objUser->email = $email;
@@ -21,7 +23,11 @@ if(isset($_POST['cadastrar'])){
     }
 }
 
-// $db = new Database("dados_pessoais");
+$usuarios = [];
+
+if (isset($_GET['listar'])){
+    $usuarios = $objUser->buscar_todos();
+}
 
 ?>
 <!DOCTYPE html>
@@ -42,6 +48,34 @@ if(isset($_POST['cadastrar'])){
             <br>
             <button type="submit" name="cadastrar">Cadastrar</button>
         </form>
+
+        <form method="GET">
+            <button type="submit" name="listar">Listar</button>
+        </form>
+
+        <?php if(!empty($usuarios)): ?>
+            <h2>Usuários Cadastrados</h2>
+
+            <table  border="1" collapse="collapse">
+                <tr>
+                <td>ID</td>
+                <td>Nome</td>
+                <td>Idade</td>
+                <td>E-mail</td>
+                </tr>
+                <?php foreach($usuarios as $usuario): ?>
+                    <tr>
+                        <td><?php htmlspecialchars($usuario['id']) ?></td>
+                        <td><?php htmlspecialchars($usuario['nome']) ?></td>
+                        <td><?php htmlspecialchars($usuario['idade']) ?></td>
+                        <td><?php htmlspecialchars($usuario['email']) ?></td>
+                    </tr>
+
+                    <?php endforeach; ?>
+            </table>
+            <?php else: ?>
+                <h2>Nenhum registro encontrado</h2>
+            <?php endif ?>
     </div>   
 </body>
 </html>
