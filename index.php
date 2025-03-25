@@ -65,10 +65,10 @@ if (isset($_GET['listar'])){
                 </tr>
                 <?php foreach($usuarios as $usuario): ?>
                     <tr>
-                        <td><?php htmlspecialchars($usuario['id']) ?></td>
-                        <td><?php htmlspecialchars($usuario['nome']) ?></td>
-                        <td><?php htmlspecialchars($usuario['idade']) ?></td>
-                        <td><?php htmlspecialchars($usuario['email']) ?></td>
+                        <td><?= htmlspecialchars($usuario['id']) ?></td>
+                        <td><?= htmlspecialchars($usuario['nome']) ?></td>
+                        <td><?= htmlspecialchars($usuario['idade']) ?></td>
+                        <td><?= htmlspecialchars($usuario['email']) ?></td>
                     </tr>
 
                     <?php endforeach; ?>

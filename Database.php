@@ -62,7 +62,7 @@ Class Database {
 
     public function select($fields = '*'){
         try {
-            $query = ' SELECT ' . $this->$fields . ' FROM ' . $this->table . ';';
+            $query = " SELECT " . $fields . " FROM " . $this->table . ";";
 
             return $this->execute($query);
         } catch (\Throwable $th) {
