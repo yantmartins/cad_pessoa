@@ -37,4 +37,16 @@ Class Usuario{
             //throw $th;
         }
     }
+
+    public function excluir($id){
+        try {
+            $db = new Database('dados_pessoais');
+
+            $res = $db->delete('id = '. $id);
+
+            return $res;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

@@ -70,6 +70,22 @@ Class Database {
         }
     }
 
+    public function delete($where){
+        try {
+            $query = "DELETE FROM " .$this->table . " WHERE " . $where;
+            $del = $this->execute($query);
+            $del = $del->rowCount(); // faz uma contagem de linhas deletadas.
+
+            if($del == 1){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
 }
 
 ?>

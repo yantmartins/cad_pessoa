@@ -29,6 +29,12 @@ if (isset($_GET['listar'])){
     $usuarios = $objUser->buscar_todos();
 }
 
+if(isset($_POST['delete_id'])){
+    $deleteId = $_POST['delete_id'];
+    $objUser->excluir($deleteId);
+    $usuarios = $objUser->buscar_todos();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -69,6 +75,13 @@ if (isset($_GET['listar'])){
                         <td><?= htmlspecialchars($usuario['nome']) ?></td>
                         <td><?= htmlspecialchars($usuario['idade']) ?></td>
                         <td><?= htmlspecialchars($usuario['email']) ?></td>
+                        <td>
+                            <form method="POST">
+                                <a name="deletar" href="?delete_id=<?= $usuario['id']?>">
+                                    <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash"/>
+                                </a>
+                            </form>
+                        </td>
                     </tr>
 
                     <?php endforeach; ?>
