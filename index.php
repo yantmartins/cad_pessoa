@@ -29,8 +29,8 @@ if (isset($_GET['listar'])){
     $usuarios = $objUser->buscar_todos();
 }
 
-if(isset($_POST['delete_id'])){
-    $deleteId = $_POST['delete_id'];
+if(isset($_GET['delete_id'])){
+    $deleteId = $_GET['delete_id'];
     $objUser->excluir($deleteId);
     $usuarios = $objUser->buscar_todos();
 }
