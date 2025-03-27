@@ -49,4 +49,20 @@ Class Usuario{
             //throw $th;
         }
     }
+
+    public function atualizar(){
+        try {
+            $db = new Database('dados_pessoais');
+
+            $res = $db->update('id =' . $this->id, [
+                'nome'=> $this->nome,
+                'idade'=> $this->idade,
+                'email'=> $this->email
+            ]);
+
+            return $res;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
 }

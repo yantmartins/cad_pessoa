@@ -86,6 +86,21 @@ Class Database {
         }
     }
 
+    public function update($where, $array){
+        try {
+            $fields = array_keys($array);
+            $values = array_values($array);
+
+            $query = "UPDATE " . $this->table . " SET " . implode("=?,", $fields) . "=? WHERE " . $where;
+
+            $res = $this->execute($query, $values);
+
+            return $res->rowCount();
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+    }
+
 }
 
 ?>

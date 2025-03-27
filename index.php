@@ -35,6 +35,23 @@ if(isset($_GET['delete_id'])){
     $usuarios = $objUser->buscar_todos();
 }
 
+if(isset($_POST['editar'])){
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $idade = $_POST['idade'];
+    $email = $_POST['email'];
+
+    $objUser->id = $id;
+    $objUser->nome = $nome;
+    $objUser->idade = $idade;
+    $objUser->email = $email;
+
+    $res = $objUser->atualizar();
+    echo '<script> alert("' . ($res ? 'Editado com sucesso' : 'Não foi editado') . '") </script>';
+
+    $usuarios = $objUser->buscar_todos();
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,17 +59,28 @@ if(isset($_GET['delete_id'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script>
+        function carregaDados(id, nome, idade, email){
+            document.getElementById('id').value = id;
+            document.getElementById('nome').value = nome;
+            document.getElementById('idade').value = idade;
+            document.getElementById('email').value = email;
+            document.getElementById('submitButton').name = 'editar';
+            document.getElementById('submitButton').innerText = 'Editar';
+        }
+    </script>
 </head>
 <body>
     <div>
         <form method="POST">
+            <input type="hidden" id="id" name="id">
             <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
             <br>
             <input type="number" id="idade" name="idade" placeholder="Digite sua idade">
             <br>
             <input type="email" id="email" name="email" placeholder="Digite seu email">
             <br>
-            <button type="submit" name="cadastrar">Cadastrar</button>
+            <button type="submit" name="cadastrar" id="submitButton">Cadastrar</button>
         </form>
 
         <form method="GET">
@@ -82,9 +110,17 @@ if(isset($_GET['delete_id'])){
                                 </a>
                             </form>
                         </td>
+                        <td>
+                            <button type="button" onclick="carregaDados(
+                                '<?= htmlspecialchars($usuario['id']) ?>',
+                                '<?= htmlspecialchars($usuario['nome']) ?>',
+                                '<?= htmlspecialchars($usuario['idade']) ?>', 
+                                '<?= htmlspecialchars($usuario['email']) ?>')">
+                                <img width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/edit--v3.png" alt="edit--v3"/>
+                            </button>
+                        </td>
                     </tr>
-
-                    <?php endforeach; ?>
+                <?php endforeach; ?>
             </table>
             <?php else: ?>
                 <h2>Nenhum registro encontrado</h2>
